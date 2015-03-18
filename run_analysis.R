@@ -1,10 +1,12 @@
 ## Data Cleaning Class Project
-#  Some helpful settings to help understand the flow (change to debug=TRUE)
-  debug=FALSE
-  viewtables=TRUE  # executes a View request (use with RStudio)
-  wide=TRUE        # creates a wide tidy dataset
-  long=TRUE        # creates a long tidy dataset
+#  Some helpful settings to help understand and change the flow 
+  debug=FALSE                               # (change to debug=TRUE to see details)
+  viewtables=FALSE                          # executes a View request (use with RStudio)
+  wide=TRUE                                 # creates a wide tidy dataset
+  long=FALSE                                # creates a long tidy dataset
+  unzippedfiles="./ProjectFileUnzipped"     #  this is the directory that the files will be unzipped to
 
+# load the libraries used in the script  
   library(plyr)
   library(dplyr)
   library(data.table)
@@ -21,18 +23,30 @@
     setInternet2(NA)  ## verify it worked
 
     download.file(fileURL,"./ProjectFile.zip" ) 
-    unzip("./ProjectFile.zip",exdir="./ProjectFileUnzipped")
-    z<-file.create(paste0("./ProjectFileUnzipped/CreationDate_",
-                          as.character(format(Sys.Date(), "%Y%m%d"))))   # document creation date  
+    print("file downloaded, starting unzip process")
+    unzip("./ProjectFile.zip",exdir=unzippedfiles)
+    print("unzip complete")
+    z<-file.create(paste0(unzippedfiles,"/CreationDate_",
+            as.character(format(Sys.Date(), "%Y%m%d"))))   # document creation date  
     if (debug) {print("** files ready")}  ###  for watching the process
   }
 ###########################################################
-
+## cleanvariablenames function is used to reformat the variable names to conform to recommended
+##    naming conventions  
+  cleanvariablenames <- function(y) {
+    names(y) <- gsub("\\(","",names(y))   ## remove '(')
+    names(y) <- gsub("\\)","",names(y))   ## remove ')'
+    names(y) <- gsub("\\-","",names(y))   ## remove '-'
+    names(y) <- gsub(",","",names(y))     ## remove commas
+    names(y) <- tolower(names(y))         ## comment this statement out if you believe in camelCase 
+    names(y)
+  }
+###########################################################  
 #  check to see if the unzipped directory is present  
 # THIS SHOULD NEVER HAPPEN IF THE FILE IS THERE  
-if (!file.exists("./ProjectFileUnzipped")) {
+if (!file.exists(unzippedfiles)) {
   if (debug) {print("** data files not found - downloading now")}  ###  for watching the process 
-  dir.create("./ProjectFileUnzipped")
+  dir.create(unzippedfiles)
   getdata()
 }
 
@@ -43,16 +57,20 @@ if (!file.exists("./ProjectFileUnzipped")) {
 # lvl1 is the directory containing the base files for the test and train measurements
 # lvl2 is the directory containing the Inertial Signal files for the test and train measurements  
 
-  lvl0files <- dir("ProjectFileUnzipped/UCI HAR Dataset",pattern="\\.txt$",full.names=T)
-  testlvl1 <- dir("ProjectFileUnzipped/UCI HAR Dataset/test",pattern="\\.txt$",full.names=T)
-  testlvl2 <- dir("ProjectFileUnzipped/UCI HAR Dataset/test/Inertial Signals",pattern="\\.txt$",full.names=T)
-  trainlvl1 <- dir("ProjectFileUnzipped/UCI HAR Dataset/train",pattern="\\.txt$",full.names=T)
-  trainlvl2 <- dir("ProjectFileUnzipped/UCI HAR Dataset/train/Inertial Signals",pattern="\\.txt$",full.names=T)
-
+  if (debug) {print(paste0(unzippedfiles,"\\UCI HAR Dataset"),pattern="\\.txt$",full.names=T)}
+  lvl0files <- dir(paste0(unzippedfiles,"\\UCI HAR Dataset"),pattern="\\.txt$",full.names=T)
+  testlvl1  <- dir(paste0(unzippedfiles,"\\UCI HAR Dataset/test"),pattern="\\.txt$",full.names=T)
+  testlvl2  <- dir(paste0(unzippedfiles,"\\UCI HAR Dataset/test/Inertial Signals"),pattern="\\.txt$",full.names=T)
+  trainlvl1 <- dir(paste0(unzippedfiles,"\\UCI HAR Dataset/train"),pattern="\\.txt$",full.names=T)
+  trainlvl2 <- dir(paste0(unzippedfiles,"\\UCI HAR Dataset/train/Inertial Signals"),pattern="\\.txt$",full.names=T)
+  if (debug) {print("got the directory information")}
+  
 # read the files from the base directory
+  if (debug) {print(lvl0files)}
   activitylabels <- read.table(lvl0files[1])
   features <- read.table(lvl0files[2])
-
+  if (debug) {print("got the level 0 data")}
+  
 # read the files from the lvl 1 directories
   trainx <- read.table(trainlvl1[2])                   # measures
   trainy <- read.table(trainlvl1[3])                   # features  
@@ -60,7 +78,8 @@ if (!file.exists("./ProjectFileUnzipped")) {
   testsubject <- read.table(testlvl1[1])               # subjects
   testy <- read.table(testlvl1[3])                     # features
   testx <- read.table(testlvl1[2])                     # measures
-
+  if (debug) {print("got the level 1 data")}
+  
 # first step is to combine the columns together for the test data
   test<- cbind(testsubject,testy,testx)
   if (debug) {print(paste0("Dimension of test=",dim(test),"/nl"))}    ##  for watching details
@@ -71,6 +90,10 @@ if (!file.exists("./ProjectFileUnzipped")) {
   mergedset <- rbind(train,test)
   if (debug) {print(paste0("Dimension of mergedset=",dim(mergedset),"/nl"))} ##  for watching details
 
+## note that at this point we could clean up some of the memory in the event you have a small system
+## to do so uncomment the next line - left in for analysis
+## rm(trainx,trainy,testy,testx,trainsubject,testsubject)  
+  
 # the Forum discussions led me to ignore the 7 mean values associated with angles
 # these values all contained Mean (capital M) in their names, to include those into the 
 # list of columns analyzed, simply modify the value grepped for in the next line to "[Mm]ean"
@@ -89,25 +112,22 @@ if (!file.exists("./ProjectFileUnzipped")) {
 # add descriptive names for the activities
   mergedset$activity <- activitylabels[mergedset$activity,2]
 
-# "standardize" special characters from column names and set to lower case 
-# not sure I completely agree with all the "rules" but I tried to comply with recommendations  
-  remove <- function(x,y) { gsub(x,"",y) }  
-  names(mergedset) <- remove("\\(",names(mergedset))
-  names(mergedset) <- remove("\\)",names(mergedset))
-  names(mergedset) <- remove("\\-",names(mergedset))
-  names(mergedset) <- remove(",",names(mergedset))
-  names(mergedset) <- tolower(names(mergedset))
+# "standardize" variable names to recommended "standards" 
+# not sure I completely agree with all the "rules" but I tried to comply with recommendations   
+  names(mergedset) <- cleanvariablenames(mergedset)
 
 # show the "standardized" names if in debug mode to watch the details of the process
-if (debug) { print(names(mergedset)) }
+  if (debug) { print(names(mergedset)) }
   
   if (viewtables) {View(mergedset)}  ## to make it easier to validate results
 
+# build the wide means arrays  
   widegroupmeans <- mergedset %>% group_by(subject,activity) %>% 
     ddply(.(subject,activity), colwise(mean))
 
   if (viewtables & wide) {View(widegroupmeans)}  ## this is the tidy file which gets uploaded
-  
+
+# build the long means array if requested  
   if (long) {
     longgroupmeans <- melt(widegroupmeans, id=c("subject","activity")) %>% arrange(subject,activity,variable)
     names(longgroupmeans)[3:4] <- c("measure","mean")
