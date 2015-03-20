@@ -1,19 +1,19 @@
 ---
 title: "README"
 author: "Mike Ruland"
-date: "Monday, March 16, 2015"
+date: "Thursday, March 19, 2015"
 output: html_document
 ---
 
 This README file is an R Markdown document which explains how to run the 
 *run_analysis.R* program used to deliver the class project requirements.
 
-The following libraries are used in my solution:
-  **plyr**
-  **dplyr**
-  **data.table**
-  **reshape**
-  **lubridate**
+The following libraries are used in the solution:
+  **plyr**,
+  **dplyr**,
+  **data.table**,
+  **reshape**,
+  **lubridate**.
 
 There are a set of control variables at the beginning of the script 
 to assist with following the flow, displaying intermediate results and naming
@@ -25,24 +25,40 @@ sub-directory specified in this variable to determine if the data exists.
 
 There is a control variable called *viewtables* which will use the **View()**
 function to nicely format the 3 main intermediate tables to provide an easy
-way to see the intermediate steps prior to writing out the data (note that 
-View() seems to work best using **R-Studio**).  The program is also coded to 
-produce either a wide tidy dataset and/or a long tidy data set based on the 
-control variables *wide* and *long*.  By default the script looks for the 
-unzipped file in the directory **"./ProjectFileUnzipped"** and produces a 
-**wide** tidy dataset.
+way to see the intermediate steps prior to writing out the data.  The program 
+is also coded to produce either a wide tidy dataset and/or a long tidy data 
+set based on the control variables *wide* and *long*.  By default the script 
+looks for the unzipped file in the directory **"./ProjectFile"** and produces 
+a **long** tidy dataset.
+
+The formal description (**extracted in this paragraph from the original study**) 
+and the original data can be found at: 
+*http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones#*.
+The experiments were carried out with a group of 30 volunteers within an age 
+bracket of 19-48 years. Each person performed six activities (WALKING, 
+WALKING-UPSTAIRS, WALKING-DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a 
+smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer 
+and gyroscope, the team captured 3-axial linear acceleration and 3-axial angular 
+velocity measurements at a constant rate of 50Hz. The experiments were video-recorded to 
+help label the activity occurring when the data was collected manually. The 
+obtained dataset has been randomly partitioned into two sets, where 70% of 
+the volunteers was selected for generating the training data and 30% the test 
+data. 
 
 The script loads the file names from the directory stucture in the unzipped 
-download file that looks like this (directories are bold format):
-   **working directory**
-     **UCI HAR Dataset**
-        **test**
-          **Initial Sample**
+download file that looks like this:
+
+
+   Working directory
+   
+     UCI HAR Dataset
+        test
+          Initial Sample
           subject_test.txt          <-- subject id for test data set
           X_test.txt                <-- measurements for test data set
           Y_test.txt                <-- activity for test data set
-        **train**
-          **Initial Sample**
+        train
+          Initial Sample
           subject_train.txt         <-- subject id for train data set
           X_train.txt               <-- measurements for train data set
           Y_train.txt               <-- activity for train data set
@@ -69,22 +85,36 @@ train datasets are concatonated using an *rbind()* function.
 At this point I only retain variables containing the string *mean* and *std*
 based on the instructions in the project.  I chose not to keep the variables
 containing the string *Mean* (capital *M*) since these variables were mentioned
-in the forum as likely not being needed - note there there is a comment in the 
-code where the value *keepcolumns* is derived discussing the minor change 
-needed to include these values in the result.  About this same point I also 
-obtain the variable names associated with the retained columns (as well as the 
-subject and activity columns).  
+in the forum as likely not being needed.  I also chose to retain the variables 
+associated with meanFreq() - note there there are a comment in the 
+code where the value *keepcolumns* is derived discussing the minor changes 
+needed to include or exclude these values in the result if desired.  About this 
+same point in the script I also obtain the variable names associated with the 
+retained columns (as well as the subject and activity columns).  
 
 Next the variable names are *"standardized"* using the *cleanvariablenames()*
-function.  I then use pipelining to create the *widegroupmeans* dataset and the 
-*longgroupmeans* dataset, if specified in the contol variables.  
+function.  To determine the "best" approach for the tidy data set I reviewed
+both Hadley Wickham's Tidy Data paper in **Journal of Statistical Software** 
+*http://www.jstatsoft.org/v59/i10/paper* and David Hood's discussions in the class
+forum at *https://class.coursera.org/getdata-012/forum/thread?thread_id=234*.  
+Based on these articles I chose to use the wide form of the tidy data set - 
+meaning that the rows are longer but the variables for each observation (eg
+subject 1, standing) are on a single row.  I allow the user to optionally create
+the long version of the tidy data set as well by modifying the *"long"* 
+control variable located at the beginning of the script.
 
-Finally the requested dataset(s) is writen out using the **write.table()** 
+I use pipelining to create the *widegroupmeans* dataset and the 
+*longgroupmeans* dataset, if specified in the contol variables using the 
+**dplyr** package.  
+
+Finally the requested dataset(s) is written out using the **write.table()** 
 function and a message is written to the user explaining how to read the tables
-back into **R**.
+back into **R**.  To read the table back into R use the command
+**read.table(\"./xxxxtidydataset.txt\",header=TRUE)\n")** where *xxxx* is either
+**wide** or **long**, depending on the option chosen.
 
 To run the script, simply place the *run_analysis.R* script in your working 
 directory, check that the values in the control varibles match your needs - 
 especially the name of the directory containing the unzipped files - and 
 issue the command **source("run_analysis.R")**.  This will run the script 
-and produce the tidy dataset chosen in your working directory.
+and produce the tidy dataset(s) chosen in your working directory.

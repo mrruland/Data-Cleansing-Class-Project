@@ -1,22 +1,283 @@
 ---
 title: "Code Book"
 author: "Mike Ruland"
-date: "Monday, March 16, 2015"
+date: "Thursday, March 19, 2015"
 output: html_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This R Markdown document contains the code book for the Data Cleansing Class
+Project.  The data original data and its description can be found at: 
+*http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones#*
+Notes: 
+======
+- Features are normalized and bounded within [-1,1].
+- Each feature vector is a row on the text file.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+For more information about this dataset contact: 
+     **activityrecognition@smartlab.ws**
 
-```{r}
-summary(cars)
-```
+The following descriptions of the variables was created from the features_info.txt 
+and features.txt files provided with the data at the URL shown above.  Although 
+there may be some small errors in this file (such as the columns labeled with 
+...bodybody...it was the document which accompanied the data and the 
+*UCI Machine Learning Repository* web site did not have any apparent correction
+information.  In any case the discussion here will be consistent with the 
+documentation accompanying the data during download.
 
-You can also embed plots, for example:
+There were 561 variables measured in the original experiment but for purposes 
+of this exercise we were instructed to retain only the variables related to 
+mean and std.  I decided to include any variable with the term "mean()" or 
+"std()" in the name and included comments in the script on how to modify the 
+script to also pick up names that started with capital letters "[Mn]ean()" 
+or "[Ss]td()", resulting in more variables being chosen or restricting the 
+variables to result in fewer chosen by ignoring the meanFreq() - weighted 
+average of the frequency components to obtain a mean frequency - by adding 
+the "fixed=TRUE" attribute to the grep command.  This decision brought the 
+number of variables retained down to more manageable number (79).  
 
-```{r, echo=FALSE}
-plot(cars)
-```
+The actual variable measures in the tidy data set were obtaind by grouping 
+the data by subject and activity and calculating the mean of each variable 
+grouped by these values.  Typically the mean of the mean is not considered
+a valid statistical measure but in the case of most of these variables, the 
+sample interval and hence the number of values used to calculate the mean in 
+the original data was identical across variables and observations - the 
+result is the the mean of the mean in a large number of cases is representative
+of the actual mean across all values.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+The following list contains the variable names in the tidy data set - I have 
+retained the original number (**column**) associated with the original data
+set as well as the original (uncleaned) name from the original data set 
+**(original name)** to allow easier identification across the data but the list
+uses the "cleaned up"" variable names in the first column of the description.
+
+**Variable Name** |**original column #**|  **original name**    |              **definition**
+                             
+tbodyaccmeanx | 1 | tBodyAcc-mean()-X | *mean of timed mean body accelerometer signal along the x axis*
+
+tbodyaccmeany | 2 | tBodyAcc-mean()-Y | *mean of timed mean body accelerometer signal  along the y axis*
+
+tbodyaccmeanz | 3 | tBodyAcc-mean()-Z | *mean of timed mean body accelerometer signal  along the z axis*
+
+tbodyaccstdx  | 4 | tBodyAcc-std()-X  | *mean of timed standard deviation of body accelerometer signal  along the x axis*
+
+tbodyaccstdy  | 5 | tBodyAcc-std()-Y  | *mean of timed standard deviation of body accelerometer signal  along the y axis*
+
+tbodyaccstdz  | 6 | tBodyAcc-std()-Z  | *mean of timed standard deviation of body accelerometer signal  along the z axis*
+
+tgravityaccmeanx |  41  | tGravityAcc-mean()-X  | *mean of timed mean gravity accelerometer signal  along the x axis*
+
+tgravityaccmeany  | 42  | tGravityAcc-mean()-Y  | *mean of timed mean gravity accelerometer signal  along the y axis*
+
+tgravityaccmeanz  | 43  | tGravityAcc-mean()-Z  | *mean of timed mean gravity accelerometer signal  along the z axis*
+
+tgravityaccstdx | 44  | tGravityAcc-std()-X | *mean of timed standard deviation of gravity accelerometer signal  along the x axis*
+
+tgravityaccstdy | 45  | tGravityAcc-std()-Y | *mean of timed standard deviation of gravity accelerometer signal  along the y axis*
+
+tgravityaccstdz | 46  | tGravityAcc-std()-Z | *mean of timed standard deviation of gravity accelerometer signal  along the z axis*
+
+tbodyaccjerkmeanx | 81  | tBodyAccJerk-mean()-X | *mean of timed mean body linear acceleration along the x axis*
+
+tbodyaccjerkmeany | 82  | tBodyAccJerk-mean()-Y | *mean of timed mean body linear acceleration along the y axis*
+
+tbodyaccjerkmeanz | 83  | tBodyAccJerk-mean()-Z | *mean of timed mean body linear acceleration along the z axis*
+
+tbodyaccjerkstdx  | 84  | tBodyAccJerk-std()-X  | *mean of timed standard deviation of body linear acceleration along the x axis*
+
+tbodyaccjerkstdy  | 85  | tBodyAccJerk-std()-Y  | *mean of timed standard deviation of body linear acceleration along the y axis*
+
+tbodyaccjerkstdz  | 86  | tBodyAccJerk-std()-Z  | *mean of timed standard deviation of body linear acceleration along the z axis*
+
+tbodygyromeanx  | 121 | tBodyGyro-mean()-X  | *mean of timed mean body gyroscope signal along the x axis*
+
+tbodygyromeany  | 122 | tBodyGyro-mean()-Y  | *mean of timed mean body gyroscope signal along the y axis*
+
+tbodygyromeanz  | 123 | tBodyGyro-mean()-Z  | *mean of timed mean body agyroscope signal along the z axis*
+
+tbodygyrostdx | 124 | tBodyGyro-std()-X | *mean of timed standard deviation of body gyroscope signal along the x axis*
+
+tbodygyrostdy | 125 | tBodyGyro-std()-Y | *mean of timed standard deviation of body gyroscope signal along the y axis*
+
+tbodygyrostdz | 126 | tBodyGyro-std()-Z | *mean of timed standard deviation of body gyroscope signal along the z axis*
+
+tbodygyrojerkmeanx  | 161 | tBodyGyroJerk-mean()-X  | *mean of timed mean of body angular velocity along the x axis*
+
+tbodygyrojerkmeany  | 162 | tBodyGyroJerk-mean()-Y  | *mean of timed mean of body angular velocity along the y axis*
+
+tbodygyrojerkmeanz  | 163 | tBodyGyroJerk-mean()-Z  | *mean of timed mean of body angular velocity along the z axis*
+
+tbodygyrojerkstdx | 164 | tBodyGyroJerk-std()-X | *mean of timed standard deviation of body angular velocity along the x axis*
+
+tbodygyrojerkstdy | 165 | tBodyGyroJerk-std()-Y | *mean of timed standard deviation of body angular velocity along the y axis*
+
+tbodygyrojerkstdz | 166 | tBodyGyroJerk-std()-Z | *mean of timed standard deviation of body angular velocity along the z axis*
+
+tbodyaccmagmean | 201 | tBodyAccMag-mean()  | *mean of timed mean of magnitude of body accelerometer signal along the 3 dimensions*
+
+tbodyaccmagstd  | 202 | tBodyAccMag-std() | *mean of timed standard deviation of magnitude of body accelerometer signal along the 3 dimensions*
+
+tgravityaccmagmean  | 214 | tGravityAccMag-mean() | *mean of timed mean of magnitude of accelerometer signal  due to gravity along the 3 dimensions*
+
+tgravityaccmagstd | 215 | tGravityAccMag-std()  | *mean of timed standard deviation of magnitude of accelerometer signal  due to gravity along the 3 dimensions*
+
+tbodyaccjerkmagmean | 227 | tBodyAccJerkMag-mean()  | *mean of timed mean of magnitude of body linear acceleration along the 3 dimensions*
+
+tbodyaccjerkmagstd  | 228 | tBodyAccJerkMag-std() | *mean of timed standard deviation of magnitude of body linear acceleration along the 3 dimensions*
+
+tbodygyromagmean  | 240 | tBodyGyroMag-mean() | *mean of timed mean of magnitude of body gyroscope signal along the 3 dimensions*
+
+tbodygyromagstd | 241 | tBodyGyroMag-std()  | *mean of timed standard deviation of magnitude of body gyroscope signal along the 3 dimensions*
+
+tbodygyrojerkmagmean  | 253 | tBodyGyroJerkMag-mean() | *mean of timed mean of magnitude of body angular velocity along the 3 dimensions*
+
+tbodygyrojerkmagstd | 254 | tBodyGyroJerkMag-std()  | *mean of timed standard deviation of magnitude of body angular velocity along the 3 dimensions*
+
+fbodyaccmeanx | 266 | fBodyAcc-mean()-X | *mean of Fast Fourier Transform (FFT) mean of body accelerometer signal along the x axis*
+
+fbodyaccmeany | 267 | fBodyAcc-mean()-Y | *mean of Fast Fourier Transform (FFT) mean of body accelerometer signal along the y axis*
+
+fbodyaccmeanz | 268 | fBodyAcc-mean()-Z | *mean of Fast Fourier Transform (FFT) mean of body accelerometer signal along the z axis*
+
+fbodyaccstdx  | 269 | fBodyAcc-std()-X  | *mean of Fast Fourier Transform (FFT) standard deviation of body accelerometr signal along the x axis*
+
+fbodyaccstdy  | 270 | fBodyAcc-std()-Y  | *mean of Fast Fourier Transform (FFT) standard deviation of body accelerometer signal along the y axis*
+
+fbodyaccstdz  | 271 | fBodyAcc-std()-Z  | *mean of Fast Fourier Transform (FFT) standard deviation of body accelerometer signal along the z axis*
+
+fbodyaccmeanfreqx | 294 | fBodyAcc-meanFreq()-X | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean frequency of the body accelerometer signal along the x axis*
+
+fbodyaccmeanfreqy | 295 | fBodyAcc-meanFreq()-Y | *mean of Fast Fourier Transform (FFT)FT of weighted average of the frequency components to obtain a mean frequency of the body accelerometer signal along the y axis*
+
+fbodyaccmeanfreqz | 296 | fBodyAcc-meanFreq()-Z | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean frequency of the body accelerometer signal along the z axis*
+
+fbodyaccjerkmeanx | 345 | fBodyAccJerk-mean()-X | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean frequency of the body linear acceleration along the x axis*
+
+fbodyaccjerkmeany | 346 | fBodyAccJerk-mean()-Y | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean frequency of the body linear acceleration along the y axis*
+
+fbodyaccjerkmeanz | 347 | fBodyAccJerk-mean()-Z | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean frequency of the body linear acceleration along the z axis*
+
+fbodyaccjerkstdx  | 348 | fBodyAccJerk-std()-X  | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a standard deviation of the body linear acceleration along the x axis*
+
+fbodyaccjerkstdy  | 349 | fBodyAccJerk-std()-Y  | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a standard deviation of the body linear acceleration along the y axis*
+
+fbodyaccjerkstdz  | 350 | fBodyAccJerk-std()-Z  | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a standard deviation of the body linear acceleration along the z axis*
+
+fbodyaccjerkmeanfreqx | 373 | fBodyAccJerk-meanFreq()-X | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean of the body linear acceleration along the x axis*
+
+fbodyaccjerkmeanfreqy | 374 | fBodyAccJerk-meanFreq()-Y | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean of the body linear acceleration along the y axis*
+
+fbodyaccjerkmeanfreqz | 375 | fBodyAccJerk-meanFreq()-Z | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean of the body linear acceleration along the z axis*
+
+fbodygyromeanx  | 424 | fBodyGyro-mean()-X  | *mean of Fast Fourier Transform (FFT) of mean of the body angular acceleration along the x axis*
+
+fbodygyromeany  | 425 | fBodyGyro-mean()-Y  | *mean of Fast Fourier Transform (FFT) of mean of the body angular acceleration along the y axis*
+
+fbodygyromeanz  | 426 | fBodyGyro-mean()-Z  | *mean of Fast Fourier Transform (FFT) of mean of the body angular acceleration along the z axis*
+
+fbodygyrostdx | 427 | fBodyGyro-std()-X | *mean of Fast Fourier Transform (FFT) of standard deviation of the body angular acceleration along the x axis*
+
+fbodygyrostdy | 428 | fBodyGyro-std()-Y | *mean of Fast Fourier Transform (FFT) of standard deviation of the body angular acceleration along the y axis*
+
+fbodygyrostdz | 429 | fBodyGyro-std()-Z | *mean of Fast Fourier Transform (FFT) of standard deviation of the body angular acceleration along the z axis*
+
+fbodygyromeanfreqx  | 452 | fBodyGyro-meanFreq()-X  | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean of the body angular acceleration along the x axis*
+
+fbodygyromeanfreqy  | 453 | fBodyGyro-meanFreq()-Y  | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean of the body angular acceleration along the y axis*
+
+fbodygyromeanfreqz  | 454 | fBodyGyro-meanFreq()-Z  | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean of the body angular acceleration along the z axis*
+
+fbodyaccmagmean | 503 | fBodyAccMag-mean()  | *mean of Fast Fourier Transform (FFT) of the mean of the magnitude of the body accelerometer measurement across the three dimensions*
+
+fbodyaccmagstd  | 504 | fBodyAccMag-std() | *mean of Fast Fourier Transform (FFT) of the standard deviation of the magnitude of the body accelerometer signal along the three dimensions*
+
+fbodyaccmagmeanfreq | 513 | fBodyAccMag-meanFreq()  | *mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain a mean of the magnitude of body accelerometer signals along the 3 dimensions*
+
+fbodybodyaccjerkmagmean | 516 | fBodyBodyAccJerkMag-mean()  | *Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the mean of the magnitude of body linear acceleration along the 3 dimensions*
+
+fbodybodyaccjerkmagstd  | 517 | fBodyBodyAccJerkMag-std() | *Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the standard deviation of the magnitude of body linear acceleration along the 3 dimensions*
+
+fbodybodyaccjerkmagmeanfreq | 526 | fBodyBodyAccJerkMag-meanFreq()  |  *Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of weighted average of the frequency components to obtain the mean of the magnitude of body linear acceleration along the 3 dimensions*
+
+fbodybodygyromagmean  | 529 | fBodyBodyGyroMag-mean() | *Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the mean of the magnitude of body angular velocity along the 3 dimensions*
+
+fbodybodygyromagstd | 530 | fBodyBodyGyroMag-std()  | *Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the standard deviation of the magnitude of body angular velocity along the 3 dimensions*
+
+fbodybodygyromagmeanfreq  | 539 | fBodyBodyGyroMag-meanFreq() | *Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the weighted average of the frequency components to obtain the mean of the magnitude of body angular velocity along the 3 dimensions*
+
+fbodybodygyrojerkmagmean  | 542 | fBodyBodyGyroJerkMag-mean() | *Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the mean of the magnitude of body angular velocity along the 3 dimensions*
+
+fbodybodygyrojerkmagstd | 543 | fBodyBodyGyroJerkMag-std()  | *Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the standard deviation of the magnitude of body angular velocity along the 3 dimensions*
+
+fbodybodygyrojerkmagmeanfreq  | 552 | fBodyBodyGyroJerkMag-meanFreq() | *Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the weighted average of the frequency components to obtain the mean of the magnitude of body angular velocity along the 3 dimensions*
+
+              ** THE FOLLOWING PARAGRAPHS CONTAIN THE ORIGINAL DESCRIPTION
+                       OF THE VARIABLE NAMES FOR REFERENCE **
+
+The features selected for this database come from the accelerometer and 
+gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals
+(prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then 
+they were filtered using a median filter and a 3rd order low pass Butterworth 
+filter with a corner frequency of 20 Hz to remove noise. Similarly, the 
+acceleration signal was then separated into body and gravity acceleration 
+signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth 
+filter with a corner frequency of 0.3 Hz. 
+
+Subsequently, the body linear acceleration and angular velocity were derived in 
+time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the 
+magnitude of these three-dimensional signals were calculated using the Euclidean 
+norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals 
+producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, 
+fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+
+These signals were used to estimate variables of the feature vector for each pattern:  
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
+tBodyAcc-XYZ
+tGravityAcc-XYZ
+tBodyAccJerk-XYZ
+tBodyGyro-XYZ
+tBodyGyroJerk-XYZ
+tBodyAccMag
+tGravityAccMag
+tBodyAccJerkMag
+tBodyGyroMag
+tBodyGyroJerkMag
+fBodyAcc-XYZ
+fBodyAccJerk-XYZ
+fBodyGyro-XYZ
+fBodyAccMag
+fBodyAccJerkMag
+fBodyGyroMag
+fBodyGyroJerkMag
+
+The set of variables that were estimated from these signals are: 
+
+mean(): Mean value
+std(): Standard deviation
+mad(): Median absolute deviation 
+max(): Largest value in array
+min(): Smallest value in array
+sma(): Signal magnitude area
+energy(): Energy measure. Sum of the squares divided by the number of values. 
+iqr(): Interquartile range 
+entropy(): Signal entropy
+arCoeff(): Autorregresion coefficients with Burg order equal to 4
+correlation(): correlation coefficient between two signals
+maxInds(): index of the frequency component with largest magnitude
+meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+skewness(): skewness of the frequency domain signal 
+kurtosis(): kurtosis of the frequency domain signal 
+bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
+angle(): Angle between to vectors.
+
+Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
+
+gravityMean
+tBodyAccMean
+tBodyAccJerkMean
+tBodyGyroMean
+tBodyGyroJerkMean
+
+The complete list of variables of each feature vector is available in 'features.txt'
