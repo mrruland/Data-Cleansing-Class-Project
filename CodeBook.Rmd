@@ -16,13 +16,13 @@ Notes:
 For more information about this dataset contact: 
      **activityrecognition@smartlab.ws**
 
-The following descriptions of the variables was created from the features_info.txt 
-and features.txt files provided with the data at the URL shown above.  Although 
-there may be some small errors in this file (such as the columns labeled with 
-...bodybody...it was the document which accompanied the data and the 
-*UCI Machine Learning Repository* web site did not have any apparent correction
-information.  In any case the discussion here will be consistent with the 
-documentation accompanying the data during download.
+The following descriptions of the variables was created from the 
+features_info.txt and features.txt files provided with the data at the URL 
+shown above.  Although there may be some small errors in this file (such 
+as the columns labeled with ...bodybody...it was the document which accompanied
+the data and the *UCI Machine Learning Repository* web site did not have any
+apparent correction information.  In any case the discussion here will be 
+consistent with the documentation accompanying the data during download.
 
 There were 561 variables measured in the original experiment but for purposes 
 of this exercise we were instructed to retain only the variables related to 
@@ -41,8 +41,8 @@ grouped by these values.  Typically the mean of the mean is not considered
 a valid statistical measure but in the case of most of these variables, the 
 sample interval and hence the number of values used to calculate the mean in 
 the original data was identical across variables and observations - the 
-result is the the mean of the mean in a large number of cases is representative
-of the actual mean across all values.
+result is the the mean of the mean in a large number of cases is 
+representative of the actual mean across all values.
 
 The following list contains the variable names in the tidy data set - I have 
 retained the original number (**column**) associated with the original data
@@ -216,23 +216,25 @@ fbodybodygyrojerkmagmeanfreq  | 552 | fBodyBodyGyroJerkMag-meanFreq() | *Likely 
 The features selected for this database come from the accelerometer and 
 gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals
 (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then 
-they were filtered using a median filter and a 3rd order low pass Butterworth 
+they were filtered using a median filter and a 3rd order low pass Butterworth
 filter with a corner frequency of 20 Hz to remove noise. Similarly, the 
 acceleration signal was then separated into body and gravity acceleration 
-signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth 
+signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth
 filter with a corner frequency of 0.3 Hz. 
 
-Subsequently, the body linear acceleration and angular velocity were derived in 
-time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the 
-magnitude of these three-dimensional signals were calculated using the Euclidean 
-norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+Subsequently, the body linear acceleration and angular velocity were derived in
+time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the
+magnitude of these three-dimensional signals were calculated using the 
+Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, 
+tBodyGyroJerkMag). 
 
 Finally a Fast Fourier Transform (FFT) was applied to some of these signals 
 producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, 
-fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain 
+signals). 
 
-These signals were used to estimate variables of the feature vector for each pattern:  
-'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+These signals were used to estimate variables of the feature vector for each 
+pattern: '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
 
 tBodyAcc-XYZ
 tGravityAcc-XYZ
@@ -266,13 +268,16 @@ entropy(): Signal entropy
 arCoeff(): Autorregresion coefficients with Burg order equal to 4
 correlation(): correlation coefficient between two signals
 maxInds(): index of the frequency component with largest magnitude
-meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+meanFreq(): Weighted average of the frequency components to obtain a mean 
+            frequency
 skewness(): skewness of the frequency domain signal 
 kurtosis(): kurtosis of the frequency domain signal 
-bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
+bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT 
+               of each window.
 angle(): Angle between to vectors.
 
-Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
+Additional vectors obtained by averaging the signals in a signal window sample.
+These are used on the angle() variable:
 
 gravityMean
 tBodyAccMean
@@ -280,4 +285,5 @@ tBodyAccJerkMean
 tBodyGyroMean
 tBodyGyroJerkMean
 
-The complete list of variables of each feature vector is available in 'features.txt'
+The complete list of variables of each feature vector is available in 
+'features.txt'

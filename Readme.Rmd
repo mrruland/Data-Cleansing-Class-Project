@@ -5,7 +5,7 @@ date: "Thursday, March 19, 2015"
 output: html_document
 ---
 
-This README file is an R Markdown document which explains how to run the 
+This README file is an R Markdown document which explains how to run the
 *run_analysis.R* program used to deliver the class project requirements.
 
 The following libraries are used in the solution:
@@ -17,35 +17,35 @@ The following libraries are used in the solution:
 
 There are a set of control variables at the beginning of the script 
 to assist with following the flow, displaying intermediate results and naming
-the directory in the event the data needs to be downloaded.  If you already 
-have the data downloaded and unzipped in the current working directory, simply 
+the directory in the event the data needs to be downloaded.  If you already
+have the data downloaded and unzipped in the current working directory, simply
 change the value of the *"unzippedfiles"* variable to point to the directory 
-containing the data.  The program will look in the working directory for the 
+containing the data.  The program will look in the working directory for the
 sub-directory specified in this variable to determine if the data exists.  
 
 There is a control variable called *viewtables* which will use the **View()**
 function to nicely format the 3 main intermediate tables to provide an easy
-way to see the intermediate steps prior to writing out the data.  The program 
-is also coded to produce either a wide tidy dataset and/or a long tidy data 
-set based on the control variables *wide* and *long*.  By default the script 
-looks for the unzipped file in the directory **"./ProjectFile"** and produces 
+way to see the intermediate steps prior to writing out the data.  The program
+is also coded to produce either a wide tidy dataset and/or a long tidy data
+set based on the control variables *wide* and *long*.  By default the script
+looks for the unzipped file in the directory **"./ProjectFile"** and produces
 a **long** tidy dataset.
 
-The formal description (**extracted in this paragraph from the original study**) 
+The formal description (**extracted in this paragraph from the original study**)
 and the original data can be found at: 
 *http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones#*.
-The experiments were carried out with a group of 30 volunteers within an age 
-bracket of 19-48 years. Each person performed six activities (WALKING, 
-WALKING-UPSTAIRS, WALKING-DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a 
-smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer 
-and gyroscope, the team captured 3-axial linear acceleration and 3-axial 
-angular velocity measurements at a constant rate of 50Hz. The experiments were 
-video-recorded to help label the activity occurring when the data was collected 
-manually. The obtained dataset has been randomly partitioned into two sets, 
-where 70% of the volunteers was selected for generating the training data and 
+The experiments were carried out with a group of 30 volunteers within an age
+bracket of 19-48 years. Each person performed six activities (WALKING,
+WALKING-UPSTAIRS, WALKING-DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a
+smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer
+and gyroscope, the team captured 3-axial linear acceleration and 3-axial
+angular velocity measurements at a constant rate of 50Hz. The experiments were
+video-recorded to help label the activity occurring when the data was collected
+manually. The obtained dataset has been randomly partitioned into two sets,
+where 70% of the volunteers was selected for generating the training data and
 30% the test data. 
 
-The script loads the file names from the directory stucture in the unzipped 
+The script loads the file names from the directory stucture in the unzipped
 download file that looks like this:
 
 
@@ -68,18 +68,18 @@ download file that looks like this:
         README.txt
         
 There are 2 functions created in the script *"getdata()"* downloads and unzips
-the source data file if necessary.  *"cleanvariablenames()"* is used to clean 
-the variable names - I chose a function to implement this to make it easy to 
+the source data file if necessary.  *"cleanvariablenames()"* is used to clean
+the variable names - I chose a function to implement this to make it easy to
 reuse across multiple projects once a standard is set.
 
-The script looks for the directory containing the data and creates it if does 
-not exist.  Next it parses the directories and loads the name of the txt files 
-to read in into arrays which are then used during the read operation.  I chose 
+The script looks for the directory containing the data and creates it if does
+not exist.  Next it parses the directories and loads the name of the txt files
+to read in into arrays which are then used during the read operation.  I chose
 this approach while reading the data in the *Initial Sample* directory since 
-there were a large number of files - I later found they were unnecessary for 
-the solution to the exercise.  Once read in, the data from the test files 
+there were a large number of files - I later found they were unnecessary for
+the solution to the exercise.  Once read in, the data from the test files
 are merged together using *cbind()* function and then train files are merged
-in a similar fashion - allowing them to align properly.  Finally the test and 
+in a similar fashion - allowing them to align properly.  Finally the test and
 train datasets are concatonated using an *rbind()* function.
 
 At this point I only retain variables containing the string *mean* and *std*
