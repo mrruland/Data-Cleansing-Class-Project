@@ -119,3 +119,6 @@ directory, check that the values in the control varibles match your needs -
 especially the name of the directory containing the unzipped files - and 
 issue the command **source("run_analysis.R")**.  This will run the script 
 and produce the tidy dataset(s) chosen in your working directory.
+
+NOTE - the html files produced by Knit HTML are best viewed using the icon
+next to the **HISTORY** button near the top of the file listing. 

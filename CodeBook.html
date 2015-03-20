@@ -67,7 +67,14 @@ img {
 </div>
 
 
-<p>This R Markdown document contains the code book for the Data Cleansing Class Project. The data original data and its description can be found at: <em><a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones" class="uri">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a>#</em> Notes: ====== - Features are normalized and bounded within [-1,1]. - Each feature vector is a row on the text file.</p>
+<p>This R Markdown document contains the code book for the Data Cleansing Class Project. The data original data and its description can be found at: <em><a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones" class="uri">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a>#</em></p>
+<p><strong>NOTE</strong> - the html files produced by Knit HTML are best viewed using the icon next to the <strong>HISTORY</strong> button near the top of the file listing.</p>
+<div id="notes" class="section level1">
+<h1>Notes:</h1>
+<ul>
+<li>Features are normalized and bounded within [-1,1].</li>
+<li>Each feature vector is a row on the text file.</li>
+</ul>
 <p>For more information about this dataset contact: <a href="mailto:**activityrecognition@smartlab.ws*">**activityrecognition@smartlab.ws*</a>*</p>
 <p>The following descriptions of the variables was created from the features_info.txt and features.txt files provided with the data at the URL shown above. Although there may be some small errors in this file (such as the columns labeled with …bodybody…it was the document which accompanied the data and the <em>UCI Machine Learning Repository</em> web site did not have any apparent correction information. In any case the discussion here will be consistent with the documentation accompanying the data during download.</p>
 <p>There were 561 variables measured in the original experiment but for purposes of this exercise we were instructed to retain only the variables related to mean and std. I decided to include any variable with the term “mean()” or “std()” in the name and included comments in the script on how to modify the script to also pick up names that started with capital letters “[Mn]ean()” or “[Ss]td()”, resulting in more variables being chosen or restricting the variables to result in fewer chosen by ignoring the meanFreq() - weighted average of the frequency components to obtain a mean frequency - by adding the “fixed=TRUE” attribute to the grep command. This decision brought the number of variables retained down to more manageable number (79).</p>
@@ -171,6 +178,7 @@ img {
 <p>Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:</p>
 <p>gravityMean tBodyAccMean tBodyAccJerkMean tBodyGyroMean tBodyGyroJerkMean</p>
 <p>The complete list of variables of each feature vector is available in ‘features.txt’</p>
+</div>
 
 
 </div>

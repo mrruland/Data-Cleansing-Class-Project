@@ -8,6 +8,10 @@ output: html_document
 This R Markdown document contains the code book for the Data Cleansing Class
 Project.  The data original data and its description can be found at: 
 *http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones#*
+
+**NOTE** - the html files produced by Knit HTML are best viewed using the icon
+next to the **HISTORY** button near the top of the file listing. 
+
 Notes: 
 ======
 - Features are normalized and bounded within [-1,1].
