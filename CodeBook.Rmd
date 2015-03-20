@@ -44,9 +44,19 @@ the original data was identical across variables and observations - the
 result is the the mean of the mean in a large number of cases is 
 representative of the actual mean across all values.
 
-The following list contains the variable names in the tidy data set - I have 
-retained the original number (**column**) associated with the original data
-set as well as the original (uncleaned) name from the original data set 
+The following list contains the variable names in the tidy data set.
+
+* The __acceleration signal__ from the smartphone accelerometer axes in 
+__standard gravity units 'g'__.
+
+* The __body acceleration__ signal was obtained by subtracting the gravity from 
+the total acceleration and is also in __standard gravity units 'g'__.
+
+* The __angular velocity__ vector measured by the gyroscope for each sample are 
+in units of __radians/second__. 
+
+I have retained the original number (**column**) associated with the original
+data set as well as the original (uncleaned) name from the original data set 
 **(original name)** to allow easier identification across the data but the list
 uses the "cleaned up"" variable names in the first column of the description.
 
