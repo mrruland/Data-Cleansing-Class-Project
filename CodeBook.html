@@ -69,12 +69,7 @@ img {
 
 <p>This R Markdown document contains the code book for the Data Cleansing Class Project. The data original data and its description can be found at: <em><a href="http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones" class="uri">http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones</a>#</em></p>
 <p><strong>NOTE</strong> - the html files produced by Knit HTML are best viewed using the icon next to the <strong>HISTORY</strong> button near the top of the file listing.</p>
-<div id="notes" class="section level1">
-<h1>Notes:</h1>
-<ul>
-<li>Features are normalized and bounded within [-1,1].</li>
-<li>Each feature vector is a row on the text file.</li>
-</ul>
+<p>Note: - Features are normalized and bounded within [-1,1]. - Each feature vector is a row on the text file.</p>
 <p>For more information about this dataset contact: <a href="mailto:**activityrecognition@smartlab.ws*">**activityrecognition@smartlab.ws*</a>*</p>
 <p>The following descriptions of the variables was created from the features_info.txt and features.txt files provided with the data at the URL shown above. Although there may be some small errors in this file (such as the columns labeled with …bodybody…it was the document which accompanied the data and the <em>UCI Machine Learning Repository</em> web site did not have any apparent correction information. In any case the discussion here will be consistent with the documentation accompanying the data during download.</p>
 <p>There were 561 variables measured in the original experiment but for purposes of this exercise we were instructed to retain only the variables related to mean and std. I decided to include any variable with the term “mean()” or “std()” in the name and included comments in the script on how to modify the script to also pick up names that started with capital letters “[Mn]ean()” or “[Ss]td()”, resulting in more variables being chosen or restricting the variables to result in fewer chosen by ignoring the meanFreq() - weighted average of the frequency components to obtain a mean frequency - by adding the “fixed=TRUE” attribute to the grep command. This decision brought the number of variables retained down to more manageable number (79).</p>
@@ -86,7 +81,8 @@ img {
 <li><p>The <strong>angular velocity</strong> vector measured by the gyroscope for each sample are in units of <strong>radians/second</strong>.</p></li>
 </ul>
 <p>I have retained the original number (<strong>column</strong>) associated with the original data set as well as the original (uncleaned) name from the original data set <strong>(original name)</strong> to allow easier identification across the data but the list uses the “cleaned up”&quot; variable names in the first column of the description.</p>
-<p><strong>Variable Name</strong> |<strong>original column #</strong>| <strong>original name</strong> | <strong>definition</strong></p>
+<div id="variable-name-original-column-original-name-definition" class="section level3">
+<h3><strong>Variable Name</strong> |<strong>original column #</strong>| <strong>original name</strong> | <strong>definition</strong></h3>
 <p>tbodyaccmeanx | 1 | tBodyAcc-mean()-X | <em>mean of timed mean body accelerometer signal along the x axis</em></p>
 <p>tbodyaccmeany | 2 | tBodyAcc-mean()-Y | <em>mean of timed mean body accelerometer signal along the y axis</em></p>
 <p>tbodyaccmeanz | 3 | tBodyAcc-mean()-Z | <em>mean of timed mean body accelerometer signal along the z axis</em></p>
@@ -166,8 +162,9 @@ img {
 <p>fbodybodygyrojerkmagmean | 542 | fBodyBodyGyroJerkMag-mean() | <em>Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the mean of the magnitude of body angular velocity along the 3 dimensions</em></p>
 <p>fbodybodygyrojerkmagstd | 543 | fBodyBodyGyroJerkMag-std() | <em>Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the standard deviation of the magnitude of body angular velocity along the 3 dimensions</em></p>
 <p>fbodybodygyrojerkmagmeanfreq | 552 | fBodyBodyGyroJerkMag-meanFreq() | <em>Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the weighted average of the frequency components to obtain the mean of the magnitude of body angular velocity along the 3 dimensions</em></p>
-<pre><code>          ** THE FOLLOWING PARAGRAPHS CONTAIN THE ORIGINAL DESCRIPTION
-                   OF THE VARIABLE NAMES FOR REFERENCE **</code></pre>
+</div>
+<div id="the-following-paragraphs-contain-the-original-description-of-the-variable-names-for-reference" class="section level3">
+<h3>THE FOLLOWING PARAGRAPHS CONTAIN THE ORIGINAL DESCRIPTION OF THE VARIABLE NAMES FOR REFERENCE</h3>
 <p>The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix ‘t’ to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz.</p>
 <p>Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag).</p>
 <p>Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the ‘f’ to indicate frequency domain signals).</p>

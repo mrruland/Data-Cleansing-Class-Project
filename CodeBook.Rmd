@@ -12,8 +12,7 @@ Project.  The data original data and its description can be found at:
 **NOTE** - the html files produced by Knit HTML are best viewed using the icon
 next to the **HISTORY** button near the top of the file listing. 
 
-Notes: 
-======
+Note: 
 - Features are normalized and bounded within [-1,1].
 - Each feature vector is a row on the text file.
 
@@ -64,8 +63,8 @@ data set as well as the original (uncleaned) name from the original data set
 **(original name)** to allow easier identification across the data but the list
 uses the "cleaned up"" variable names in the first column of the description.
 
-**Variable Name** |**original column #**|  **original name**    |              **definition**
-                             
+###**Variable Name** |**original column #**|  **original name**    |              **definition**
+                          
 tbodyaccmeanx | 1 | tBodyAcc-mean()-X | *mean of timed mean body accelerometer signal along the x axis*
 
 tbodyaccmeany | 2 | tBodyAcc-mean()-Y | *mean of timed mean body accelerometer signal  along the y axis*
@@ -224,8 +223,7 @@ fbodybodygyrojerkmagstd | 543 | fBodyBodyGyroJerkMag-std()  | *Likely a naming e
 
 fbodybodygyrojerkmagmeanfreq  | 552 | fBodyBodyGyroJerkMag-meanFreq() | *Likely a naming error but carried through for consistency (bodybody)- mean of Fast Fourier Transform (FFT) of the weighted average of the frequency components to obtain the mean of the magnitude of body angular velocity along the 3 dimensions*
 
-              ** THE FOLLOWING PARAGRAPHS CONTAIN THE ORIGINAL DESCRIPTION
-                       OF THE VARIABLE NAMES FOR REFERENCE **
+### THE FOLLOWING PARAGRAPHS CONTAIN THE ORIGINAL DESCRIPTION OF THE VARIABLE NAMES FOR REFERENCE
 
 The features selected for this database come from the accelerometer and 
 gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals
