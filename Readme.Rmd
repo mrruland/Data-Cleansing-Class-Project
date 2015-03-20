@@ -38,12 +38,12 @@ The experiments were carried out with a group of 30 volunteers within an age
 bracket of 19-48 years. Each person performed six activities (WALKING, 
 WALKING-UPSTAIRS, WALKING-DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a 
 smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer 
-and gyroscope, the team captured 3-axial linear acceleration and 3-axial angular 
-velocity measurements at a constant rate of 50Hz. The experiments were video-recorded to 
-help label the activity occurring when the data was collected manually. The 
-obtained dataset has been randomly partitioned into two sets, where 70% of 
-the volunteers was selected for generating the training data and 30% the test 
-data. 
+and gyroscope, the team captured 3-axial linear acceleration and 3-axial 
+angular velocity measurements at a constant rate of 50Hz. The experiments were 
+video-recorded to help label the activity occurring when the data was collected 
+manually. The obtained dataset has been randomly partitioned into two sets, 
+where 70% of the volunteers was selected for generating the training data and 
+30% the test data. 
 
 The script loads the file names from the directory stucture in the unzipped 
 download file that looks like this:
@@ -85,22 +85,23 @@ train datasets are concatonated using an *rbind()* function.
 At this point I only retain variables containing the string *mean* and *std*
 based on the instructions in the project.  I chose not to keep the variables
 containing the string *Mean* (capital *M*) since these variables were mentioned
-in the forum as likely not being needed.  I also chose to retain the variables 
+in the forum as likely not being needed.  I also chose to retain the variables
 associated with meanFreq() - note there there are a comment in the 
 code where the value *keepcolumns* is derived discussing the minor changes 
-needed to include or exclude these values in the result if desired.  About this 
+needed to include or exclude these values in the result if desired.  About this
 same point in the script I also obtain the variable names associated with the 
 retained columns (as well as the subject and activity columns).  
 
 Next the variable names are *"standardized"* using the *cleanvariablenames()*
 function.  To determine the "best" approach for the tidy data set I reviewed
 both Hadley Wickham's Tidy Data paper in **Journal of Statistical Software** 
-*http://www.jstatsoft.org/v59/i10/paper* and David Hood's discussions in the class
-forum at *https://class.coursera.org/getdata-012/forum/thread?thread_id=234*.  
+*http://www.jstatsoft.org/v59/i10/paper* and David Hood's discussions in the 
+class forum at 
+*https://class.coursera.org/getdata-012/forum/thread?thread_id=234*.  
 Based on these articles I chose to use the wide form of the tidy data set - 
 meaning that the rows are longer but the variables for each observation (eg
-subject 1, standing) are on a single row.  I allow the user to optionally create
-the long version of the tidy data set as well by modifying the *"long"* 
+subject 1, standing) are on a single row.  I allow the user to optionally 
+createthe long version of the tidy data set as well by modifying the *"long"* 
 control variable located at the beginning of the script.
 
 I use pipelining to create the *widegroupmeans* dataset and the 
@@ -110,8 +111,8 @@ I use pipelining to create the *widegroupmeans* dataset and the
 Finally the requested dataset(s) is written out using the **write.table()** 
 function and a message is written to the user explaining how to read the tables
 back into **R**.  To read the table back into R use the command
-**read.table(\"./xxxxtidydataset.txt\",header=TRUE)\n")** where *xxxx* is either
-**wide** or **long**, depending on the option chosen.
+**read.table(\"./xxxxtidydataset.txt\",header=TRUE)\n")** where *xxxx* is 
+either **wide** or **long**, depending on the option chosen.
 
 To run the script, simply place the *run_analysis.R* script in your working 
 directory, check that the values in the control varibles match your needs - 
