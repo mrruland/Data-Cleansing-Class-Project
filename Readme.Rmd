@@ -125,13 +125,13 @@ I use pipelining to create the *widegroupmeans* dataset and the
 Finally the requested dataset(s) is written out using the **write.table()** 
 function and a message is written to the user explaining how to read the tables
 back into **R**.  To read the table back into R use the command
-**read.table(\"./xxxxtidydataset.txt\",header=TRUE)\n")** where *xxxx* is 
+**read.table("./xxxxtidydataset.txt",header=TRUE)")** where *xxxx* is 
 either **wide** or **long**, depending on the option chosen.
 
 To run the script, simply place the *run_analysis.R* script in your working 
 directory, check that the values in the control varibles match your needs - 
 especially the name of the directory containing the unzipped files - and 
-issue the command **source("run_analysis.R")**.  This will run the script 
+issue the command **source("run_analysis.R")** .  This will run the script 
 and produce the tidy dataset(s) chosen in your working directory.
 
 NOTE - the html files produced by Knit HTML are best viewed using the icon
