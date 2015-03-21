@@ -6,7 +6,21 @@ output: html_document
 ---
 
 This README file is an R Markdown document which explains how to run the
-*run_analysis.R* program used to deliver the class project requirements.
+*run_analysis.R* program used to deliver the class project requirements.  
+The solution was built using RStudio Version 0.98.1102.  The instructions
+for the exercise left a number of decisions open to interpretation and
+after reviewing the various forums available on the project, I chose to 
+follow my initial course and retain more variables than some others have
+done.  My reasoning is that it is easier to remove variables later than to 
+go back and readd them - in these cases I documented my choice in the script
+and inserted comments on how the alternative approach can be implemented.  I
+also added code to download and unzip the source data if it was not present 
+as well as options to generate either the long tidy data set, the short tidy
+data set, or both - mainly to help with my own knowledge.  The script is 
+extensively commented to help other follow my logic and I have found the 
+inline documentation is typically far more likely to be maintained than a 
+separate document.  Although I experienced a good deal of frustration with 
+the exercise, it was very instructional.
 
 The following libraries are used in the solution:
   **plyr**,
