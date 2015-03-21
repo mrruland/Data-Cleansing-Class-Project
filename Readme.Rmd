@@ -1,12 +1,12 @@
 ---
 title: "README"
 author: "Mike Ruland"
-date: "Thursday, March 19, 2015"
+date: "Saturday, March 21, 2015"
 output: html_document
 ---
 
 This README file is an R Markdown document which explains how to run the
-*run_analysis.R* program used to deliver the class project requirements.  
+*run_analysis.R* program used to deliver the class project requirements.
 The solution was built using RStudio Version 0.98.1102.  The instructions
 for the exercise left a number of decisions open to interpretation and
 after reviewing the various forums available on the project, I chose to 
